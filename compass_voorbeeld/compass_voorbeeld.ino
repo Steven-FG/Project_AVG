@@ -18,8 +18,6 @@ LSM303 compass;
 Pushbutton button(ZUMO_BUTTON);
 
 void setup () {
-  // maak een seriele verbinding
-  Serial.begin(9600);
   // maak verbinding met de I2C bus als een master
   Wire.begin();
 
@@ -35,10 +33,8 @@ void setup () {
   // wacht tot dat  
   button.waitForButton();
 
-  Serial.println("begin calibratie: ");
   // kalibreer de gyroscoop
   kalibreer();
-  Serial.println("einde calibratie: ");
 
 }
 
