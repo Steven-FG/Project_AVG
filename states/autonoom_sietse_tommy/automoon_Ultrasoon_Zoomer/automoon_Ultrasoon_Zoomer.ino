@@ -5,12 +5,12 @@
 
 // Zet de standaard snelheden
 #define HIGH_SPEED 200
-#define BOOST_SPEED 150
+#define BOOST_SPEED 140
 #define AVRG_SPEED 115
 #define SLOW_SPEED 100
 #define STOP_SPEED 0
 // Compass defines
-#define KEREN_KALIBREREN    70    // hoeveel calibratie voorbelden er worden genomen
+#define KEREN_KALIBREREN    90    // hoeveel calibratie voorbelden er worden genomen
 #define CRB_REG_M_2_5GAUSS  0x60  // CRB_REG_M value for magnetometer +/-2.5 gauss full scale
 #define CRA_REG_M_220HZ     0x1C  // CRA_REG_M value for magnetometer 220 Hz update rate
 // Toelaatbaar verschil (in graden) tussen hoedige hoek en target hoek
@@ -95,19 +95,19 @@ void loop() {
       buzzer.playNote(NOTE_G(5), 200, 15);
       delay(1000);
       motors.setSpeeds(AVRG_SPEED, AVRG_SPEED);
-      delay(80);
+      delay(150);
     }
     // alse de AGV de juiste afstand van de rand heeft
-    if (afstand >= 30 && afstand <= 40) {
+    if (afstand >= 25 && afstand <= 35) {
       motors.setSpeeds(AVRG_SPEED, AVRG_SPEED);
       ultrasoon_object();
     // asl de GV te ver naar links staat
-    } else if (afstand > 40) {
+    } else if (afstand > 35) {
       motors.setLeftSpeed(BOOST_SPEED);
       motors.setRightSpeed(SLOW_SPEED);
       ultrasoon_object();
     // als de AGV te ver naar rechts staat
-    } else if (afstand < 30) {
+    } else if (afstand < 25) {
       motors.setLeftSpeed(SLOW_SPEED);
       motors.setRightSpeed(BOOST_SPEED);
       ultrasoon_object();
@@ -119,7 +119,7 @@ void loop() {
 
     if(teller == 1){
     // laat de AGV even recht door rijden
-    motors.setSpeeds(AVRG_SPEED, AVRG_SPEED);
+    motors.setSpeeds(HIGH_SPEED, HIGH_SPEED);
     delay(600);
     // sta stil
     motors.setLeftSpeed(STOP_SPEED);
@@ -128,24 +128,24 @@ void loop() {
     // draai met 180 graden
     draai(180, true);
     // rij weer terug het pad in
-    motors.setSpeeds(AVRG_SPEED, AVRG_SPEED);
-    delay(650);
+    motors.setSpeeds(BOOST_SPEED, BOOST_SPEED);
+    delay(700);
     }
 
     if(teller == 2){
     // laat de AGV even recht door rijden
-    motors.setSpeeds(AVRG_SPEED, AVRG_SPEED);
+    motors.setSpeeds(BOOST_SPEED, BOOST_SPEED);
     delay(700);
     // sta stil
     motors.setLeftSpeed(STOP_SPEED);
     motors.setRightSpeed(STOP_SPEED);
 
       teller = 0;
-    draai(85, true);
+    draai(88, true);
     // rijd naar volgende pad
     motors.setSpeeds(AVRG_SPEED, AVRG_SPEED);
-    delay(1300);
-    draai(85, true);
+    delay(1600);
+    draai(92, true);
     // rijd pad in
     motors.setSpeeds(AVRG_SPEED, AVRG_SPEED);
     delay(750);
@@ -168,8 +168,8 @@ void kalibreer (void) {
   delay(500);
 
   // rechts om draaien om te kalibreren
-  motors.setLeftSpeed(AVRG_SPEED);
-  motors.setRightSpeed(-AVRG_SPEED);
+  motors.setLeftSpeed(HIGH_SPEED);
+  motors.setRightSpeed(-HIGH_SPEED);
 
   for(uint8_t i = 0; i < KEREN_KALIBREREN; i++)
   {
