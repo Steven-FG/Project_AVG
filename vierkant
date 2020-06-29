@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int lengte;
+
+    printf("Geef de lengte van de ribben voor het vierkant.\n");
+    scanf("%d", &lengte);
+
+    int i = lengte;
+    int x = lengte;
+    int y = lengte;
+    int z = lengte;
+
+    while(i > 0)
+    {
+        printf("* ");
+        i--;
+    }
+
+
+    while(x > 2)
+    {
+
+        printf("\n*");
+        x--;
+        while(z > 1)
+        {
+            printf(" ");
+            z--;
+        }
+        z = lengte;
+        while(z > 2)
+        {
+            printf(" ");
+            z--;
+        }
+        z = lengte;
+        printf("*");
+
+    }
+
+    printf(" \n");
+
+    while(y > 0)
+    {
+        printf("* ");
+        y--;
+    }
+
+    return 0;
+}
